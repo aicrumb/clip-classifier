@@ -23,6 +23,13 @@ prediction = prediction.to_string()
 
 print(prediction)
 ```
+that will print:
+```
+dog    0.3565158545970917%
+cat    0.3199838101863861%
+mouse    0.32350030541419983%
+```
+
 
 ```python
 
