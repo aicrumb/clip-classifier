@@ -23,6 +23,13 @@ prediction = prediction.to_string()
 
 print(prediction)
 ```
+that will print:
+```
+dog    0.3565158545970917%
+cat    0.3199838101863861%
+mouse    0.32350030541419983%
+```
+
 
 ```python
 
@@ -64,3 +71,12 @@ for step, batch in enumerate(tqdm(dataloader)):
 
 print(classifier([load_img(url) for url in urls]).outputs)
 ```
+that will print:
+```
+tensor([[0.3238, 0.3399, 0.3364],
+        [0.3262, 0.3632, 0.3106],
+        [0.3183, 0.3289, 0.3527]])
+```
+that's because it's only training one step, the confidence will go higher if you train for more (just put a for i in range(epochs): before the enumerate step)
+
+also remember to use classifier.projection_head.eval() when evaluating, because it has dropout
