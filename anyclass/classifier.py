@@ -112,7 +112,9 @@ class SequenceClassifier(nn.Module):
 		self.model = model 
 		self.classes = classes 
 	def forward(self, x):
-		return Prediction(self.classes, model(x))
+		logits = model(x)
+		softmax = F.softmax(logits, dim=-1)
+		return Prediction(self.classes, softmax)
 
 def load_img(url_or_path):
     if str(url_or_path).startswith('http://') or str(url_or_path).startswith('https://'):
