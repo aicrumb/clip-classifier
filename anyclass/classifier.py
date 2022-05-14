@@ -91,6 +91,28 @@ class CLIPClassifier(nn.Module):
 	def recompute_classes(self):
 		self.embeddings = [self.projection_head(self.model.encode_text(clip.tokenize(x).to(device))) for x in self.categories]
 
+class ImageClassifier(nn.Module):
+	def __init__(self, classes, model):
+		self.model = model 
+		self.classes = classes 
+	def forward(self, x):
+		if "tensor" not in str(type(x)).lower() and "list" not in str(type(x)).lower():
+			x = transforms.ToTensor()(x).unsqueeze(0)
+			x = self.fix(x).to(device)
+		if str(type(x))=="<class 'list'>":
+			x = [transforms.ToTensor()(i) for i in x]
+			x = torch.cat([self.fix(i).unsqueeze(0) for i in x], 0).to(device)
+
+			logits = self.model(x)
+			softmax = F.softmax(logits, dim=-1)
+			return Prediction(self.classes, softmax)
+
+class SequenceClassifier(nn.Module):
+	def __init__(self, classes, model):
+		self.model = model 
+		self.classes = classes 
+	def forward(self, x):
+		return Prediction(self.classes, model(x))
 
 def load_img(url_or_path):
     if str(url_or_path).startswith('http://') or str(url_or_path).startswith('https://'):

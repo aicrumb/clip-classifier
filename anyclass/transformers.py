@@ -3,6 +3,7 @@ import torch
 from torch import nn
 from einops import rearrange
 from .tokenizers import pair, ImageTokenizer
+from .classifier import Prediction
 
 class PreNorm(nn.Module):
     def __init__(self, dim, fn):
@@ -96,7 +97,7 @@ class SqT(nn.Module):
         return self.mlp_head(x)
 
 class ViT(nn.Module):
-    def __init__(self, *, image_size, patch_size, num_classes, dim, depth, heads, mlp_dim, pool = 'cls', channels = 3, dim_head = 64, dropout = 0., emb_dropout = 0.):
+    def __init__(self, *, image_size, patch_size, num_classes, dim, depth, heads, mlp_dim, pool = 'cls', channels = 3, dim_head = 64, dropout = 0., emb_dropout = 0., classes=None):
         super().__init__()
         self.tokenizer = ImageTokenizer(image_size=image_size, patch_size=patch_size, dim=dim, channels=channels)
         self.dropout = nn.Dropout(emb_dropout)
