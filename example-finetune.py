@@ -7,7 +7,7 @@ from tqdm.auto import tqdm
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-classifier = Classifier(["among us", "fortnite", "frito-lay product"], 
+classifier = CLIPClassifier(["among us", "fortnite", "frito-lay product"], 
 						clip_model="ViT-B/32", # ViT-L/14@336px, ViT-L/14, ViT-B/16, ViT-B/32, RN50, RN101, RN50x4, RN50x16, RN50x64
 						projection=True,
 						projection_dim=128)
