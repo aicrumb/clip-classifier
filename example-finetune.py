@@ -2,7 +2,7 @@
 # advanced usage, add trainable projection head
 from torch import optim
 import torch
-from anyclass import Classifier, SphericalDistanceLoss, load_img
+from anyclass import CLIPClassifier, SphericalDistanceLoss, load_img
 from tqdm.auto import tqdm
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'

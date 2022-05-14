@@ -1,7 +1,7 @@
 # simple usage
-from anyclass import Classifier, load_img
+from anyclass import CLIPClassifier, load_img
 
-classifier = Classifier(["dog", "cat", "mouse"])
+classifier = CLIPClassifier(["dog", "cat", "mouse"])
 
 image = load_img("dog.jpg")
 

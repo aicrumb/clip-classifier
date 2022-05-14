@@ -60,10 +60,10 @@ class ProjectionHead(nn.Module):
         x = self.layer_norm(x)
         return x
 
-class Classifier(nn.Module):
-	def __init__(self, categories, clip_model="ViT-B/32", projection=False, projection_dim=512):
+class CLIPClassifier(nn.Module):
+	def __init__(self, classes, clip_model="ViT-B/32", projection=False, projection_dim=512):
 		super().__init__()
-		self.categories = categories
+		self.classes = classes
 		self.model = clip_model
 		self.model = clip.load(clip_model, jit=False)[0].to(device).float()
 		self.fix = transforms.Resize((self.model.visual.input_resolution,self.model.visual.input_resolution))
@@ -87,7 +87,7 @@ class Classifier(nn.Module):
 		logits = 1-torch.cat([torch.cat([sph_dist(i, logits[j]).unsqueeze(0) for i in self.embeddings]).unsqueeze(0) for j in range(logits.shape[0])], 0)
 		
 		softmax = F.softmax(logits, dim=-1)
-		return Prediction(self.categories, softmax)
+		return Prediction(self.classes, softmax)
 	def recompute_classes(self):
 		self.embeddings = [self.projection_head(self.model.encode_text(clip.tokenize(x).to(device))) for x in self.categories]
 
