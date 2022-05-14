@@ -1,6 +1,7 @@
 ### why
 
 i was so bored of writing the code myself like once a month so i spent way too long creating a little package to help me out
+
 none of this is clean code. none of this is professional. it's all cobbled together tools that i use personally
 
 ### installation
