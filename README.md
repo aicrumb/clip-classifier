@@ -9,7 +9,7 @@ none of this is clean code. none of this is professional. it's all cobbled toget
 requires pytorch, tqdm, torchvision, fastsr, i imagine einops and ftfy because it depends on clip?
 if you just use `pip install git+https://github.com/openai/CLIP` it'll download every requirement there
 
-`pip install git+https://github.com/aicrumb/anyclass` for installation of the package itself
+`pip install git+https://github.com/aicrumb/clip-classifier` for installation of the package itself
 
 ### usage
 ```python
