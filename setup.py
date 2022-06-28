@@ -3,7 +3,7 @@ import setuptools
 setuptools.setup(
     name='anyclass',
     version='0.0.1',
-    author='Chloe R (aicrumb)',
+    author='aicrumb',
     author_email='aicrumbmail@gmail.com',
     description='Simple Classifiers built on top of CLIP',
     long_description='i was bored of writing the code myself every time lol',
